@@ -38,13 +38,16 @@ public class LapTime : MonoBehaviour
 
     public void stopTime()
     {
-        if (MillisecondCount <= bestMillisecond && SecondCount <= bestSecond && bestMinute <= MinuteCount || bestMillisecond == 0 && bestSecond == 0 && bestMinute == 0)
+        var t1 = System.TimeSpan.Parse(getDisplayText(bestMillisecond, bestSecond, bestMinute));
+        var t2 = System.TimeSpan.Parse(getDisplayText(MillisecondCount, SecondCount, MinuteCount));
+
+        if (t1 > t2 || bestMillisecond == 0 && bestSecond == 0 && bestMinute == 0)
         {
             bestMillisecond = MillisecondCount;
             bestSecond = SecondCount;
             bestMinute = MinuteCount;
 
-            Debug.Log("Best time beaten");
+            Debug.Log(getDisplayText(bestMillisecond, bestSecond, bestMinute));
             bestTimeText.GetComponent<TextMeshProUGUI>().text = getDisplayText(bestMillisecond, bestSecond, bestMinute);
         }
         MillisecondCount = SecondCount = MinuteCount = 0;
@@ -55,30 +58,30 @@ public class LapTime : MonoBehaviour
     {
         string displayText = "";
 
-        if (MinuteCount <= 9)
+        if (m <= 9)
         {
-            displayText += "0" + MinuteCount.ToString() + ".";
+            displayText += "0" + m.ToString() + ":";
         }
         else
         {
-            displayText += MinuteCount.ToString() + ".";
+            displayText += m.ToString() + ":";
         }
 
-        if (SecondCount <= 9)
+        if (s <= 9)
         {
-            displayText += "0" + SecondCount.ToString() + ".";
+            displayText += "0" + s.ToString() + ":";
         }
         else
         {
-            displayText += SecondCount.ToString() + ".";
+            displayText += s.ToString() + ":";
         }
-        if (MillisecondCount <= 9)
+        if (ms <= 9)
         {
-            displayText += "0" + MillisecondCount.ToString("F0");
+            displayText += "0" + ms.ToString("F0");
         }
         else
         {
-            displayText += MillisecondCount.ToString("F0");
+            displayText += ms.ToString("F0");
         }
 
         return displayText;
