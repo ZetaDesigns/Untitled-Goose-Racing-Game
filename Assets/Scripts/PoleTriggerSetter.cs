@@ -15,6 +15,7 @@ public class PoleTriggerSetter : MonoBehaviour
     {
         StartLine.enabled = true;
         HalfWayLine.enabled = false;
+        roundStarted = false;
     }
 
     // Update is called once per frame

@@ -11,6 +11,10 @@ public class LapTime : MonoBehaviour
     public static float bestMinute, bestSecond, bestMillisecond = 0;
     public bool roundStarted;
 
+    private void Start()
+    {
+        MinuteCount = SecondCount = MillisecondCount = bestMillisecond = bestSecond = bestMillisecond = 0;
+    }
     void Update()
     {
         if(roundStarted)
