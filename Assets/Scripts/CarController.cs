@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
+
 public class CarController : MonoBehaviour
 {
     private float horizontalInput;
@@ -56,6 +58,10 @@ public class CarController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         honk = Input.GetKeyDown(KeyCode.E);
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 
     private void Steer()
@@ -91,6 +97,5 @@ public class CarController : MonoBehaviour
         quat = quat * Quaternion.Euler(new Vector3(90, 90, 180));
         trans.position = pos;
         trans.rotation = quat;
-
     }
 }
